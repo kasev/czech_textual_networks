@@ -34,6 +34,7 @@ from bs4 import BeautifulSoup
 import networkx as nx
 
 ### for visualization
+import plotly.plotly as py
 import plotly.graph_objs as go
 #from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
@@ -186,7 +187,7 @@ def draw_2d_network(networkx_object, file_name, mode):
         text=weight_list,
         mode='markers',
         hoverinfo='text',
-        marker=go.scatter.Marker(
+        marker=dict(
             opacity=0
             )
         )
@@ -291,11 +292,11 @@ def draw_2d_network(networkx_object, file_name, mode):
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
             ))
     if mode=="offline":
-        return plot(fig, filename=file_name+".html")
+        return plot(fig, filename="../" + file_name+".html")
     if mode=="online":
         return py.iplot(fig, filename=file_name)
     if mode=="eps":
-        return pio.write_image(fig, "../images/" + file_name + ".eps" , scale=1)
+        return pio.write_image(fig, "../" + file_name + ".eps" , scale=1)
     
 def draw_3d_network(networkx_object, file_name, mode):
     '''take networkX object and draw it in 3D'''
@@ -421,9 +422,9 @@ def draw_3d_network(networkx_object, file_name, mode):
     data=[trace1, trace2, middle_node_trace]
     fig=go.Figure(data=data, layout=layout)
     if mode=="offline":
-        return plot(fig, filename=file_name+".html")
+        return plot(fig, filename="../" + file_name+"_3D.html")
     if mode=="online":
         return py.iplot(fig, filename=file_name)
     if mode=="eps":
-        return pio.write_image(fig, "../images/" + file_name + "_3D.eps" , scale=1)
+        return pio.write_image(fig, "../" + file_name + "_3D.eps" , scale=1)
 
