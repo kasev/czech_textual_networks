@@ -39,7 +39,7 @@ import plotly.graph_objs as go
 #from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
 import plotly.io as pio
-init_notebook_mode(connected=False)
+init_notebook_mode(connected=True)
 
 '''FUNCTIONS'''
 
@@ -292,7 +292,7 @@ def draw_2d_network(networkx_object, file_name, mode):
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
             ))
     if mode=="offline":
-        return plot(fig, filename="../" + file_name+".html")
+        return iplot(fig, filename="../" + file_name+".html")
     if mode=="online":
         return py.iplot(fig, filename=file_name)
     if mode=="eps":
@@ -422,7 +422,7 @@ def draw_3d_network(networkx_object, file_name, mode):
     data=[trace1, trace2, middle_node_trace]
     fig=go.Figure(data=data, layout=layout)
     if mode=="offline":
-        return plot(fig, filename="../" + file_name+"_3D.html")
+        return iplot(fig, filename="../" + file_name+"_3D.html")
     if mode=="online":
         return py.iplot(fig, filename=file_name)
     if mode=="eps":
